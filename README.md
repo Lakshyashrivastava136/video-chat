@@ -1,4 +1,4 @@
-**Note: this repository is currently archived**
+**Note: This repository is currently archived**
 
 # video-chat
 
