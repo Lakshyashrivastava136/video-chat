@@ -1,3 +1,5 @@
+Note: this repository is currently archived
+
 # video-chat
 
 This project was generated with [React CLI](https://github.com/facebook/create-react-app) version 17.0.2
