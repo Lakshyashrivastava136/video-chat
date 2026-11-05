@@ -9,6 +9,7 @@ import { callStates, setCallRejected, setLocalCameraEnabled, setLocalMicrophoneE
 import ConversationButtons from '../ConversationButtons/ConversationButtons';
 import Messenger from '../Messenger/Messenger';
 import CallTimer from '../CallTimer/CallTimer';
+import RemoteUserName from '../RemoteUserName/RemoteUserName'; // NEW
 
 const DirectCall = (props) => {
   const {
@@ -34,6 +35,7 @@ const DirectCall = (props) => {
       {callState === callStates.CALL_REQUESTED && <IncomingCallDialog callerUsername={callerUsername} />}
       {callingDialogVisible && <CallingDialog />}
       {remoteStream && callState === callStates.CALL_IN_PROGRESS && <CallTimer />}
+      {remoteStream && callState === callStates.CALL_IN_PROGRESS && <RemoteUserName username={callerUsername} />} {/* NEW */}
       {remoteStream && callState === callStates.CALL_IN_PROGRESS && <ConversationButtons {...props} />}
       {remoteStream && callState === callStates.CALL_IN_PROGRESS && <Messenger message={message} setDirectCallMessage={setDirectCallMessage} />}
     </>

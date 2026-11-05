@@ -90,6 +90,7 @@ const createPeerConnection = () => {
 
 export const callToOtherUser = (calleeDetails) => {
   connectedUserSocketId = calleeDetails.socketId;
+  store.dispatch(setCallerUsername(calleeDetails.username)); // NEW
   store.dispatch(setCallState(callStates.CALL_IN_PROGRESS));
   store.dispatch(setCallingDialogVisible(true));
   wss.sendPreOffer({
