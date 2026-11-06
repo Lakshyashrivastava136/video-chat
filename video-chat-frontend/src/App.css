@@ -1,0 +1,33 @@
+:root {
+  --main-bg: #800080;
+  --secondary-bg: #282c34;
+  --text-color: #e6e5e8;
+}
+
+body.light-theme {
+  --main-bg: #e8d9f2;
+  --secondary-bg: #f4f4f8;
+  --text-color: #1f1f25;
+}
+
+.background_main_color{
+  background-color: var(--main-bg);
+}
+.background_secondary_color{
+  background-color: var(--secondary-bg);
+}
+.text_main_color{
+  background-color: #e6e5e8;
+}
+.text_secondary_color{
+  background-color: #800080;
+}
+footer{
+  position:fixed;
+  text-align: center;
+  bottom: 0px;
+  width: 400px;
+  padding: 3px;
+  background-color: #800080;
+  color: white;
+}

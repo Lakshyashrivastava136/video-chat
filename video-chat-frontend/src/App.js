@@ -7,6 +7,7 @@ import {useEffect} from 'react';
 import {connectWithWebSocket} from './utils/wssConnection/wssConnection';
 import Dashboard from './Dashboard/Dashboard';
 import LoginPage from './LoginPage/LoginPage';
+import ThemeToggle from './Dashboard/components/ThemeToggle/ThemeToggle'; // NEW
 
 function App() {
   useEffect(() => {
@@ -14,6 +15,7 @@ function App() {
   },[]);
   return (
     <Router>
+      <ThemeToggle /> {/* NEW */}
       <Switch>
         <Route path='/dashboard'>
           <Dashboard/>
