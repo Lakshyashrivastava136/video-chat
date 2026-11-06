@@ -1,5 +1,5 @@
 import store from '../../store/store';
-import { setLocalStream, setCallState, callStates, setCallingDialogVisible, setCallerUsername, setCallRejected, setRemoteStream, setScreenSharingActive, resetCallDataState, setMessage } from '../../store/actions/callActions';
+import { setLocalStream, setCallState, callStates, setCallingDialogVisible, setCallerUsername, setCallRejected, setRemoteStream, setScreenSharingActive, resetCallDataState, setMessage, setCallSummary } from '../../store/actions/callActions'; // NEW: setCallSummary
 import * as wss from '../wssConnection/wssConnection';
 
 const preOfferAnswers = {
@@ -25,6 +25,7 @@ const configuration = {
 let connectedUserSocketId;
 let peerConnection;
 let dataChannel;
+let callStartTime = null; // NEW
 
 export const getLocalStream = () => {
   navigator.mediaDevices.getUserMedia(defaultConstrains)
@@ -49,6 +50,9 @@ const createPeerConnection = () => {
   }
 
   peerConnection.ontrack = ({ streams: [stream] }) => {
+    if (!callStartTime) { // NEW
+      callStartTime = Date.now(); // NEW
+    } // NEW
     store.dispatch(setRemoteStream(stream));
   };
 
@@ -90,7 +94,7 @@ const createPeerConnection = () => {
 
 export const callToOtherUser = (calleeDetails) => {
   connectedUserSocketId = calleeDetails.socketId;
-  store.dispatch(setCallerUsername(calleeDetails.username)); // NEW
+  store.dispatch(setCallerUsername(calleeDetails.username));
   store.dispatch(setCallState(callStates.CALL_IN_PROGRESS));
   store.dispatch(setCallingDialogVisible(true));
   wss.sendPreOffer({
@@ -229,6 +233,16 @@ export const hangUp = () => {
 };
 
 const resetCallDataAfterHangUp = () => {
+  // NEW: call ki duration nikalo aur store me save karo
+  if (callStartTime) {
+    const durationInSeconds = Math.floor((Date.now() - callStartTime) / 1000);
+    store.dispatch(setCallSummary({
+      username: store.getState().call.callerUsername,
+      duration: durationInSeconds
+    }));
+    callStartTime = null;
+  }
+
   peerConnection.close();
   peerConnection = null;
   createPeerConnection();

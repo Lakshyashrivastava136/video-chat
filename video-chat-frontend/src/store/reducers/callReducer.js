@@ -18,7 +18,8 @@ const initState = {
   message: {
     received: false,
     content: ''
-  }
+  },
+  callSummary: null
 };
 
 const reducer = (state = initState, action) => {
@@ -101,6 +102,11 @@ const reducer = (state = initState, action) => {
       return {
         ...state,
         message: action.message
+      };
+    case callActions.CALL_SET_CALL_SUMMARY:
+      return {
+        ...state,
+        callSummary: action.callSummary
       };
     default:
       return state;

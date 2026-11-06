@@ -5,11 +5,12 @@ import RemoteVideoView from '../RemoteVideoView/RemoteVideoView';
 import CallRejectedDialog from '../CallRejectedDialog/CallRejectedDialog';
 import IncomingCallDialog from '../IncomingCallDialog/IncomingCallDialog';
 import CallingDialog from '../CallingDialog/CallingDialog';
-import { callStates, setCallRejected, setLocalCameraEnabled, setLocalMicrophoneEnabled, setMessage } from '../../../store/actions/callActions';
+import { callStates, setCallRejected, setLocalCameraEnabled, setLocalMicrophoneEnabled, setMessage, setCallSummary } from '../../../store/actions/callActions'; // NEW: setCallSummary
 import ConversationButtons from '../ConversationButtons/ConversationButtons';
 import Messenger from '../Messenger/Messenger';
 import CallTimer from '../CallTimer/CallTimer';
-import RemoteUserName from '../RemoteUserName/RemoteUserName'; // NEW
+import RemoteUserName from '../RemoteUserName/RemoteUserName';
+import CallSummaryDialog from '../CallSummaryDialog/CallSummaryDialog'; // NEW
 
 const DirectCall = (props) => {
   const {
@@ -21,7 +22,9 @@ const DirectCall = (props) => {
     callRejected,
     hideCallRejectedDialog,
     setDirectCallMessage,
-    message
+    message,
+    callSummary, // NEW
+    clearCallSummary // NEW
   } = props;
 
   return (
@@ -35,9 +38,10 @@ const DirectCall = (props) => {
       {callState === callStates.CALL_REQUESTED && <IncomingCallDialog callerUsername={callerUsername} />}
       {callingDialogVisible && <CallingDialog />}
       {remoteStream && callState === callStates.CALL_IN_PROGRESS && <CallTimer />}
-      {remoteStream && callState === callStates.CALL_IN_PROGRESS && <RemoteUserName username={callerUsername} />} {/* NEW */}
+      {remoteStream && callState === callStates.CALL_IN_PROGRESS && <RemoteUserName username={callerUsername} />}
       {remoteStream && callState === callStates.CALL_IN_PROGRESS && <ConversationButtons {...props} />}
       {remoteStream && callState === callStates.CALL_IN_PROGRESS && <Messenger message={message} setDirectCallMessage={setDirectCallMessage} />}
+      {callSummary && <CallSummaryDialog callSummary={callSummary} clearCallSummary={clearCallSummary} />} {/* NEW */}
     </>
   );
 };
@@ -53,7 +57,8 @@ function mapDispatchToProps (dispatch) {
     hideCallRejectedDialog: (callRejectedDetails) => dispatch(setCallRejected(callRejectedDetails)),
     setCameraEnabled: (enabled) => dispatch(setLocalCameraEnabled(enabled)),
     setMicrophoneEnabled: (enabled) => dispatch(setLocalMicrophoneEnabled(enabled)),
-    setDirectCallMessage: (received, content) => dispatch(setMessage(received, content))
+    setDirectCallMessage: (received, content) => dispatch(setMessage(received, content)),
+    clearCallSummary: () => dispatch(setCallSummary(null)) // NEW
   };
 }
 
