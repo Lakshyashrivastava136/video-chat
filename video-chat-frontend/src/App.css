@@ -1,33 +1,102 @@
+/* ---------- Design tokens ---------- */
 :root {
-  --main-bg: #800080;
-  --secondary-bg: #282c34;
-  --text-color: #e6e5e8;
+  --bg: #17101f;
+  --surface: #211830;
+  --raised: #2c2140;
+  --line: #3b2d52;
+  --text: #efe9f7;
+  --muted: #a99bc0;
+  --accent: #b57bff;
+  --accent-strong: #8f4ff0;
+  --on-accent: #1a0f2a;
+  --live: #3ddc97;
+  --danger: #ff5a6e;
+  --dock-bg: rgba(23, 16, 31, 0.78);
+  --shadow: 0 12px 32px rgba(0, 0, 0, 0.38);
+  --logo-filter: invert(0.92);
 }
 
 body.light-theme {
-  --main-bg: #e8d9f2;
-  --secondary-bg: #f4f4f8;
-  --text-color: #1f1f25;
+  --bg: #f4f0fa;
+  --surface: #ffffff;
+  --raised: #ece6f6;
+  --line: #ddd2ee;
+  --text: #21162f;
+  --muted: #6b5d82;
+  --accent: #7a35d6;
+  --accent-strong: #6425b8;
+  --on-accent: #ffffff;
+  --live: #14a56b;
+  --danger: #d93a4f;
+  --dock-bg: rgba(255, 255, 255, 0.86);
+  --shadow: 0 12px 32px rgba(60, 30, 100, 0.14);
+  --logo-filter: none;
 }
 
-.background_main_color{
-  background-color: var(--main-bg);
+/* ---------- Shared helpers (used by existing components) ---------- */
+.background_main_color {
+  background-color: var(--bg);
 }
-.background_secondary_color{
-  background-color: var(--secondary-bg);
+
+.background_secondary_color {
+  background-color: var(--surface);
 }
-.text_main_color{
-  background-color: #e6e5e8;
+
+.text_main_color {
+  color: var(--text);
 }
-.text_secondary_color{
-  background-color: #800080;
+
+.text_secondary_color {
+  color: var(--muted);
 }
-footer{
-  position:fixed;
+
+/* ---------- Footer ---------- */
+footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 12px;
   text-align: center;
-  bottom: 0px;
-  width: 400px;
-  padding: 3px;
-  background-color: #800080;
-  color: white;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* ---------- Theme toggle ---------- */
+.theme_toggle {
+  position: fixed;
+  top: 36px;
+  right: 36px;
+  z-index: 20;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--raised);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.theme_toggle:hover {
+  border-color: var(--accent);
+}
+
+/* ---------- Scrollbars ---------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 }

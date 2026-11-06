@@ -5,12 +5,17 @@ const UsernameInput = (props) => {
 
   return (
     <div className='login-page_input_container'>
+      <label className='login-page_label' htmlFor='username'>Your name</label>
       <input
-        placeholder='Enter your name'
+        id='username'
+        placeholder='e.g. Riya'
         type='text'
+        autoFocus
+        autoComplete='off'
+        maxLength={20}
         value={username}
         onChange={(event) => { setUsername(event.target.value); }}
-        className='login-page_input background_main_color text_main_color'
+        className='login-page_input'
       />
     </div>
   );

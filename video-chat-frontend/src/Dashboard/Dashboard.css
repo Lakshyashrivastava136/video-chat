@@ -2,61 +2,165 @@
   width: 100vw;
   height: 100vh;
   display: flex;
+  gap: 16px;
+  padding: 16px 16px 40px;
+  overflow: hidden;
 }
 
 .dashboard_left_section {
-  width: 80%;
+  flex: 1;
+  min-width: 0;
   height: 100%;
   display: flex;
   flex-direction: column;
+  gap: 16px;
 }
 
-.dashboard_right_section {
-  width: 20%;
-  height: 100%;
-}
-
+/* The stage: video, call controls and dialogs are placed inside it */
 .dashboard_content_container {
-  width: 100%;
-  height: 80%;
+  position: relative;
+  flex: 1;
+  min-height: 0;
   display: flex;
   align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.dashboard_content_container video {
+  object-fit: cover;
 }
 
 .dashboard_rooms_container {
-  width: 100%;
-  height: 20%;
+  flex-shrink: 0;
+  height: 76px;
+  padding: 0 20px;
   display: flex;
   align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow-x: auto;
 }
 
-.dashboard_info_text_container {
-  margin-left: 30px;
+.dashboard_right_section {
+  width: 300px;
+  flex-shrink: 0;
+  height: 100%;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-}
-
-.dashboard_info_text_title {
-  font-size: 50px;
-}
-
-.dashboard_info_text_description {
-  margin-top: 20px;
-  font-size: 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 24px;
 }
 
 .dashboard_active_users_list {
-  height: 80%
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .dashboard_logo_container {
-  height: 20%;
+  height: 72px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-  font-size: 50px;
 }
 
 .dashboard_logo_image {
-  width: 50%;
+  width: 40px;
+  filter: var(--logo-filter);
+  opacity: 0.85;
+}
+
+/* ---------- In-call overlays ---------- */
+.local_video_view {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 4;
+  width: 176px;
+  height: 132px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--raised);
+  border: 2px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.local_video_element {
+  width: 100%;
+  height: 100%;
+  transform: scaleX(-1);
+}
+
+.call_timer,
+.remote_user_name {
+  position: absolute;
+  top: 20px;
+  z-index: 4;
+  height: 34px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  background: var(--dock-bg);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
+
+.call_timer {
+  left: 50%;
+  transform: translateX(-50%);
+  font-variant-numeric: tabular-nums;
+}
+
+.call_timer_dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--live);
+}
+
+.remote_user_name {
+  left: 20px;
+}
+
+.call_summary {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+  width: min(340px, 90%);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  background: var(--raised);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.call_summary_text {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.call_summary_duration {
+  font-family: 'Bricolage Grotesque', 'Figtree', sans-serif;
+  font-size: 44px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }

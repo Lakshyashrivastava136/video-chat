@@ -5,13 +5,13 @@ import './Dashboardinformation.css';
 const DashboardInformation = ({ username }) => {
   return (
     <div className='dashboard_info_text_container'>
-      <span className='dashboard_info_text_title'>
-        Hello {username} welcome in VideoChat.
-      </span>
-      <span className='dashboard_info_text_description'>
-        You can start a call calling directy to a person from the list or
-        you can create or join group call.
-      </span>
+      <h1 className='dashboard_info_text_title'>
+        Ready when you are{username ? `, ${username}` : ''}.
+      </h1>
+      <p className='dashboard_info_text_description'>
+        Pick someone from the list on the right to start a video call,
+        or create a room to talk with a group.
+      </p>
     </div>
   );
 };

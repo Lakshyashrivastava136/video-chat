@@ -1,21 +1,9 @@
 import React from 'react';
-import { MdCallEnd, MdMic, MdMicOff, MdVideocam, MdVideocamOff, MdVideoLabel, MdCamera } from 'react-icons/md';
+import { MdCallEnd, MdMic, MdMicOff, MdVideocam, MdVideocamOff, MdScreenShare, MdStopScreenShare } from 'react-icons/md';
 import ConversationButton from './ConversationButton';
 import { switchForScreenSharingStream, hangUp } from '../../../utils/webRTC/webRTCHandler';
 
-const styles = {
-  buttonContainer: {
-    display: 'flex',
-    position: 'absolute',
-    bottom: '22%',
-    left: '35%'
-  },
-  icon: {
-    width: '25px',
-    height: '25px',
-    fill: '#e6e5e8'
-  }
-};
+import './ConversationButtons.css';
 
 const ConversationButtons = (props) => {
   const {
@@ -49,19 +37,39 @@ const ConversationButtons = (props) => {
   };
 
   return (
-    <div style={styles.buttonContainer}>
-      <ConversationButton onClickHandler={handleMicButtonPressed}>
-        {localMicrophoneEnabled ? <MdMic style={styles.icon} /> : <MdMicOff style={styles.icon} />}
+    <div className='conversation_buttons'>
+      <ConversationButton
+        onClickHandler={handleMicButtonPressed}
+        label={localMicrophoneEnabled ? 'Mute microphone' : 'Unmute microphone'}
+        variant={localMicrophoneEnabled ? '' : 'off'}
+      >
+        {localMicrophoneEnabled ? <MdMic /> : <MdMicOff />}
       </ConversationButton>
-      {!groupCall && <ConversationButton onClickHandler={handleHangUpButtonPressed}>
-        <MdCallEnd style={styles.icon} />
-      </ConversationButton>}
-      <ConversationButton onClickHandler={handleCameraButtonPressed}>
-        {localCameraEnabled ? <MdVideocam style={styles.icon} /> : <MdVideocamOff style={styles.icon} />}
+      <ConversationButton
+        onClickHandler={handleCameraButtonPressed}
+        label={localCameraEnabled ? 'Turn camera off' : 'Turn camera on'}
+        variant={localCameraEnabled ? '' : 'off'}
+      >
+        {localCameraEnabled ? <MdVideocam /> : <MdVideocamOff />}
       </ConversationButton>
-      {!groupCall && <ConversationButton onClickHandler={handleScreenSharingButtonPressed}>
-        {screenSharingActive ? <MdCamera style={styles.icon} /> : <MdVideoLabel style={styles.icon} />}
-      </ConversationButton>}
+      {!groupCall && (
+        <ConversationButton
+          onClickHandler={handleScreenSharingButtonPressed}
+          label={screenSharingActive ? 'Stop sharing screen' : 'Share screen'}
+          variant={screenSharingActive ? 'on' : ''}
+        >
+          {screenSharingActive ? <MdStopScreenShare /> : <MdScreenShare />}
+        </ConversationButton>
+      )}
+      {!groupCall && (
+        <ConversationButton
+          onClickHandler={handleHangUpButtonPressed}
+          label='Hang up'
+          variant='danger'
+        >
+          <MdCallEnd />
+        </ConversationButton>
+      )}
     </div>
   );
 };

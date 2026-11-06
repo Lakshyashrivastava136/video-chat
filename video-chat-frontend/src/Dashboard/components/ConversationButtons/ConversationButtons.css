@@ -1,0 +1,64 @@
+.conversation_buttons {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--dock-bg);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.conversation_button {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--raised);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s;
+}
+
+.conversation_button:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.conversation_button svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+/* mic or camera switched off */
+.conversation_button--off {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--bg);
+}
+
+/* screen sharing running */
+.conversation_button--on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+/* hang up */
+.conversation_button--danger {
+  width: 72px;
+  border-radius: 999px;
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #ffffff;
+}

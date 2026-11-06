@@ -7,9 +7,15 @@ const GroupCallRoomsListItem = ({ room }) => {
   };
 
   return (
-    <div onClick={handleListItemPressed} className='group_calls_list_item background_main_color'>
-      <span>{room.hostName}</span>
-    </div>
+    <button
+      type='button'
+      onClick={handleListItemPressed}
+      className='group_calls_list_item'
+      title={`Join ${room.hostName}'s room`}
+    >
+      <span className='group_calls_list_dot' />
+      {room.hostName}&apos;s room
+    </button>
   );
 };
 

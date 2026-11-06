@@ -1,16 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 
-const styles = {
-  videoContainer: {
-    width: '300px',
-    height: '300px'
-  },
-  videoElement: {
-    width: '100%',
-    height: '100%'
-  }
-};
-
 const GroupCallVideo = ({ stream }) => {
   const videoRef = useRef();
 
@@ -23,8 +12,8 @@ const GroupCallVideo = ({ stream }) => {
   }, [stream]);
 
   return (
-    <div style={styles.videoContainer}>
-      <video ref={videoRef} autoPlay style={styles.videoElement} />
+    <div className='group_call_video'>
+      <video ref={videoRef} autoPlay className='group_call_video_element' />
     </div>
   );
 };

@@ -1,20 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-const styles = {
-  timer: {
-    position: 'absolute',
-    top: '15px',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    padding: '6px 14px',
-    borderRadius: '20px',
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
-    color: '#e6e5e8',
-    fontSize: '16px',
-    fontFamily: 'monospace'
-  }
-};
-
 const pad = (n) => String(n).padStart(2, '0');
 
 const formatTime = (totalSeconds) => {
@@ -37,7 +22,12 @@ const CallTimer = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return <div style={styles.timer}>{formatTime(seconds)}</div>;
+  return (
+    <div className='call_timer'>
+      <span className='call_timer_dot' />
+      {formatTime(seconds)}
+    </div>
+  );
 };
 
 export default CallTimer;

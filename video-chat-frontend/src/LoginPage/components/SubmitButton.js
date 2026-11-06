@@ -1,16 +1,10 @@
 import React from 'react';
 
-const SubmitButton = ({ handleSubmitButtonPressed }) => {
+const SubmitButton = ({ disabled }) => {
   return (
-    <div className='login-page_button_container'>
-      <button
-        className='login-page_button background_main_color text_main_color'
-        onClick={handleSubmitButtonPressed}
-      >
-      START
-      </button>
-    </div>
-
+    <button type='submit' className='login-page_button' disabled={disabled}>
+      Start chatting
+    </button>
   );
 };
 

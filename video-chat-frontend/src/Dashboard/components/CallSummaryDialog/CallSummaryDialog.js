@@ -1,30 +1,5 @@
 import React, { useEffect } from 'react';
 
-const styles = {
-  box: {
-    position: 'absolute',
-    top: 'calc(50% - 75px)',
-    left: 'calc(50% - 150px)',
-    width: '300px',
-    height: '150px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: '8px',
-    backgroundColor: '#282C34',
-    color: '#e6e5e8',
-    fontSize: '18px',
-    textAlign: 'center',
-    zIndex: 10
-  },
-  duration: {
-    marginTop: '10px',
-    fontSize: '28px',
-    fontFamily: 'monospace'
-  }
-};
-
 const pad = (n) => String(n).padStart(2, '0');
 
 const formatDuration = (totalSeconds) => {
@@ -47,11 +22,11 @@ const CallSummaryDialog = ({ callSummary, clearCallSummary }) => {
   }, [callSummary]);
 
   return (
-    <div style={styles.box}>
-      <span>
-        Call ended{callSummary.username ? ` with ${callSummary.username}` : ''}
+    <div className='call_summary'>
+      <span className='call_summary_text'>
+        {callSummary.username ? `Call with ${callSummary.username} ended` : 'Call ended'}
       </span>
-      <span style={styles.duration}>{formatDuration(callSummary.duration)}</span>
+      <span className='call_summary_duration'>{formatDuration(callSummary.duration)}</span>
     </div>
   );
 };

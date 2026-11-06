@@ -2,8 +2,13 @@ import React from 'react';
 import './GroupCallButton.css';
 
 const GroupCallButton = ({ onClickHandler, label }) => {
+  const isLeave = label === 'Leave room';
+
   return (
-    <button onClick={onClickHandler} className='group_call_button background_main_color'>
+    <button
+      onClick={onClickHandler}
+      className={`group_call_button${isLeave ? ' group_call_button--leave' : ''}`}
+    >
       { label }
     </button>
   );
