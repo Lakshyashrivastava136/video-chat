@@ -8,10 +8,13 @@ let groupCallRoomId;
 let groupCallHost = false;
 
 export const connectWithMyPeer = () => {
+  const serverUrl = new URL(process.env.REACT_APP_SERVER_URL || 'http://localhost:5000');
+
   myPeer = new window.Peer(undefined, {
     path: '/peerjs',
-    host: '/',
-    port: '5000'
+    host: serverUrl.hostname,
+    port: serverUrl.port || (serverUrl.protocol === 'https:' ? 443 : 80),
+    secure: serverUrl.protocol === 'https:'
   });
 
   myPeer.on('open', (id) => {

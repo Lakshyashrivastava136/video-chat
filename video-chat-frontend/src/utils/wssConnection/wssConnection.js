@@ -4,7 +4,7 @@ import * as dashboardActions from '../../store/actions/dashboardActions';
 import * as webRTCHandler from '../webRTC/webRTCHandler';
 import * as webRTCGroupCallHandler from '../webRTC/webRTCGroupCallHandler';
 
-const SERVER = 'http://localhost:5000';
+const SERVER = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000';
 
 const broadcastEventTypes = {
   ACTIVE_USERS: 'ACTIVE_USERS',
