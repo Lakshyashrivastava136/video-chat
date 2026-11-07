@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { acceptIncomingCallRequest, rejectIncomingCallRequest } from '../../../utils/webRTC/webRTCHandler';
+import { startRingtone, stopRingtone } from '../../../utils/ringtone/ringtone';
 
 import './IncomingCallDialog.css';
 
 const IncomingCallDialog = ({ callerUsername }) => {
+  useEffect(() => {
+    startRingtone();
+    return () => stopRingtone();
+  }, []);
+
   const handleAcceptButtonPressed = () => {
     acceptIncomingCallRequest();
   };
